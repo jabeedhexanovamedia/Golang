@@ -12,35 +12,35 @@
 
 ##### 2. Why Use Gin?
 
-###### Performance:
+##### Performance:
 
 - Gin is one of the fastest web frameworks available for Go.
 
 - It achieves this by using a highly optimized HTTP router and minimizing overhead.
 
-###### Simplicity:
+##### Simplicity:
 
 - Gin provides a clean and intuitive API for defining routes, handling requests, and sending responses.
 
 - It avoids unnecessary complexity, making it easy to learn and use.
 
-###### Middleware Support:
+##### Middleware Support:
 
 - Gin has built-in support for middleware, which allows you to add functionality like logging, authentication, and error handling to your application.
 
-###### Flexibility:
+##### Flexibility:
 
 - Gin is unopinionated, meaning it doesn’t enforce a specific way of doing things. You have the freedom to structure your application as you see fit.
 
 ##### 3. How Does Gin Compare to Other Go Frameworks?
 
-###### Standard Library (net/http):
+##### Standard Library (net/http):
 
 - Go’s standard library provides a basic HTTP server, but it requires more boilerplate code for routing, middleware, and error handling.
 
 - Gin abstracts these complexities, making development faster and easier.
 
-###### Other Frameworks (e.g., Echo, Fiber):
+##### Other Frameworks (e.g., Echo, Fiber):
 
 - Frameworks like Echo and Fiber are also popular in the Go ecosystem.
 
@@ -48,19 +48,19 @@
 
 ##### 4. Key Features of Gin
 
-###### Routing:
+##### Routing:
 
 - Gin provides a powerful and flexible routing system.
 
 - You can define routes for different HTTP methods (GET, POST, PUT, DELETE, etc.) and handle dynamic path parameters.
 
-###### Middleware:
+##### Middleware:
 
 - Middleware functions can be used to process requests before they reach the handler.
 
 - Examples include logging, authentication, and request validation.
 
-###### JSON Binding and Validation:
+##### JSON Binding and Validation:
 
 - Gin simplifies working with JSON data by automatically binding request bodies to Go structs and validating the data.
 
@@ -68,31 +68,31 @@
 
 ##### 5. How Does Gin Work Under the Hood?
 
-###### HTTP Server:
+##### HTTP Server:
 
 - At its core, Gin uses Go’s standard net/http package to create an HTTP serve
 
 - However, Gin adds a layer of abstraction to simplify routing, middleware, and request handling.
 
-###### Router:
+##### Router:
 
 - Gin’s router is responsible for matching incoming requests to the appropriate handler based on the request path and method.
 
 - It uses a radix tree (a compressed trie) to efficiently match routes.
 
-###### Context (\*gin.Context):
+##### Context (\*gin.Context):
 
 - The \*gin.Context object is the heart of Gin.
 
 - It encapsulates the HTTP request and response, providing methods to read request data, set response headers, and send responses.
 
-###### Middleware:
+##### Middleware:
 
 - Middleware functions are executed in the order they are added.
 
 - Each middleware can modify the request, perform checks, or even abort the request.
 
-###### Handlers:
+##### Handlers:
 
 - Handlers are functions that process requests and send responses.
 
@@ -129,23 +129,23 @@ func main() {
 
 - Let’s analyze the code step by step:
 
-###### r := gin.Default():
+##### r := gin.Default():
 
 - Creates a new Gin router with default middleware (logging and recovery).
 
-###### r.GET("/hello", func(c \*gin.Context) { ... }):
+##### r.GET("/hello", func(c \*gin.Context) { ... }):
 
 - Registers a route for the GET /hello endpoint.
 
 - The handler function takes a \*gin.Context as its argument.
 
-###### c.JSON(200, gin.H{ ... }):
+##### c.JSON(200, gin.H{ ... }):
 
 - Sends a JSON response with a 200 status code.
 
 - gin.H is a shortcut for creating a map (used for JSON responses).
 
-###### r.Run(":8080"):
+##### r.Run(":8080"):
 
 - Starts the HTTP server on port 8080.
 
@@ -155,7 +155,7 @@ func main() {
 
 - When you write r := gin.Default(), you're creating a new Gin router instance. Let’s break this down:
 
-###### gin.Default():
+##### gin.Default():
 
 - This function initializes a new Gin engine with default middleware.
 
@@ -164,13 +164,13 @@ func main() {
   - 2. Recovery(): Recovers from any panics and prevents your server from crashing.
 - Under the hood, gin.Default() calls gin.New() and then adds the default middleware.
 
-###### gin.New():
+##### gin.New():
 
--This is the raw way to create a Gin engine without any default middleware.
+- This is the raw way to create a Gin engine without any default middleware.
 
 - You would use this if you want full control over which middleware to add.
 
-###### What is a Router?
+##### What is a Router?
 
 - A router (or engine in Gin) is responsible for handling incoming HTTP requests and routing them to the appropriate handler functions based on the request path and method (GET, POST, etc.).
 
@@ -178,13 +178,13 @@ func main() {
 
 - The \*gin.Context is one of the most important concepts in Gin. It represents the context of the current HTTP request and response. Let’s break it down:
 
-###### What does \*gin.Context do?
+##### What does \*gin.Context do?
 
 - It holds all the information about the incoming request (e.g., headers, query parameters, path parameters, body) and provides methods to send a response (e.g., JSON, HTML, text).
 
 - It also allows you to pass data between middleware and handlers.
 
-###### Key Methods and Properties of \*gin.Context:
+##### Key Methods and Properties of \*gin.Context:
 
 - c.Param("name"): Retrieves a path parameter (e.g., /greet/:name).
 
@@ -198,7 +198,7 @@ func main() {
 
 - c.Get(key) / c.Set(key, value): Used to store and retrieve data within the context (useful for middleware).
 
-###### Why is it a pointer (\*gin.Context)?
+##### Why is it a pointer (\*gin.Context)?
 
 - The \* indicates that gin.Context is passed as a pointer. This allows the handler to modify the context directly, which is necessary for things like setting response headers or writing the response body.
 
@@ -206,23 +206,23 @@ func main() {
 
 - Let’s understand the flow of a request in Gin:
 
-###### Request Comes In:
+##### Request Comes In:
 
 - When an HTTP request is made to your server, Gin’s router matches the request path and method to a registered route.
 
-###### Middleware Execution:
+##### Middleware Execution:
 
 - Before the request reaches the handler, it passes through any middleware attached to the router.
 
 - Middleware can modify the request, log information, or even abort the request (e.g., if authentication fails).
 
-###### Handler Execution:
+##### Handler Execution:
 
 - The handler function (e.g., func(c \*gin.Context)) processes the request.
 
 - The handler can read request data (e.g., query parameters, body) and send a response.
 
-###### Response Sent:
+##### Response Sent:
 
 - The handler writes the response (e.g., using c.JSON() or c.String()), and Gin sends it back to the client.
 
@@ -230,12 +230,12 @@ func main() {
 
 - Let’s break down what happens when you define a route like this:
 
-###### r.GET:
+##### r.GET:
 
 - This registers a route for the HTTP GET method.
 - The first argument is the path (/hello), and the second argument is the handler function.
 
-###### Handler Function:
+##### Handler Function:
 
 - The handler function takes a \*gin.Context as its argument.
 
