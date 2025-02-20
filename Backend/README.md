@@ -601,8 +601,6 @@ router.GET("/user", func(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 })
 
-
-
 ```
 
 ##### output
@@ -616,11 +614,3 @@ router.GET("/user", func(c *gin.Context) {
 
 
 ```
-
-##### Explanation:
-
-- We define an interface `Describer` with a single method `Describe`.
-- We define a struct type `Person` and `Car`.
-- We implement the `Describe` method for the `Person` type and `Car` type, which makes `Person` & `Car` satisfy the `Describer` interface.
-- Create instances of `Person` and `Car`.
-- Use the `Describe` method through the `Describer` interface
