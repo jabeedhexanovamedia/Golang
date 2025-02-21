@@ -103,11 +103,11 @@ func main () {
 			"query": term,
 		})
 	})
-// Add a custom middleware that logs the request method and path.
+    // Add a custom middleware that logs the request method and path.
 	r.Use(customMiddleware)
 
-		// Apply middleware to a route
-		r.GET("/welcome", storeUserNameMiddleare, printUserNameHandler)
+	// Apply middleware to a route
+	r.GET("/welcome", storeUserNameMiddleare, printUserNameHandler)
 
 
 	r.Run(":8080")
