@@ -1684,3 +1684,5 @@ func main() {
 - We implement the `Describe` method for the `Person` type and `Car` type, which makes `Person` & `Car` satisfy the `Describer` interface.
 - Create instances of `Person` and `Car`.
 - Use the `Describe` method through the `Describer`
+
+##### RESTART
