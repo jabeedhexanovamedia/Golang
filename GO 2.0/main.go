@@ -110,6 +110,42 @@ func main() {
 	// Write a function that returns two values: name and age.
 
 	// data("jaddu", 25)
-	divide(2, 0)
+	// divide(2, 0)
 	// Write a function isPositive(n int) that returns true if number > 0.
+	//
+	// LOOPS
+	// for i := 0; i < 20; i++ {
+	// 	fmt.Println(i)
+	// }
+
+	// for j := 0; j < 5; j ++ {
+	// 	fmt.Println(j)
+	// }
+	// for j := 0; j < 5; j += 2 {
+	// 	fmt.Println(j)
+	// }
+	// Print “GoLang” 5 times.
+	// for i := 0; i <= 4; i++ {
+	// 	fmt.Println("Golang")
+	// }
+	// Print even numbers from 2 to 20.
+	// for i := 2; i <= 20; i++ {
+	// 	if i%2 == 0 {
+	// 		fmt.Println(i)
+	// 	}
+	// }
+	//
+	// SWITCH
+	// age := 17
+
+	// switch {
+	// case age < 18:
+	// 	fmt.Println("You are a minor")
+	// case age >= 18:
+	// 	fmt.Println("You are an adult")
+	// default:
+	// 	fmt.Println("Invalid age")
+
+	// }
+
 }
