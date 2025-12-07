@@ -118,6 +118,33 @@ func main() {
 		})
 
 	})
+	//Query parameters
+	e.GET("/search", func(c echo.Context) error {
+		name := c.QueryParam("name")
+
+		return c.JSON(http.StatusOK, map[string]string{
+			"data": name,
+		})
+	})
+
+	// Route Grouping & API Versioning
+	api := e.Group("/api")
+	v1 := api.Group("/v1")
+	v1.GET("profile", func(c echo.Context) error {})
+	v1.PUT("profile", func(c echo.Context) error {})
+
+	// USER
+	{
+		v1.GET("profile", func(c echo.Context) error {})
+		v1.PUT("profile", func(c echo.Context) error {})
+	}
+	//ORDER
+	{
+		v1.GET("order", func(c echo.Context) error {})
+		v1.PUT("order", func(c echo.Context) error {})
+	}
+	// Request Handling
+
 	e.Logger.Fatal(e.Start("localhost:1323"))
 
 }
