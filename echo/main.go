@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -58,6 +59,65 @@ func main() {
 		return c.String(200, fmt.Sprintf("%+v", c.Request()))
 	})
 
-	e.Logger.Fatal(e.Start("localhost:8080"))
+	// Path parameters (/user/:id)
+	e.GET("/user/:id", func(c echo.Context) error {
+		id := c.Param("id")
+		return c.String(http.StatusOK, "user id: "+id)
+	})
+
+	// multiple param
+	e.GET("/user/:userId/org/:orgId", func(c echo.Context) error {
+
+		userId := c.Param("userId")
+		orgId := c.Param("orgId")
+		params := c.ParamValues()
+
+		res := map[string]interface{}{
+			"userId": userId,
+			"orgId":  orgId,
+			"params": params,
+		}
+
+		return c.JSON(200, res)
+	})
+
+	// validation and transformation
+	e.GET("user/:userId/post/:postId", func(c echo.Context) error {
+
+		//validation
+
+		userId := c.Param("userId")
+		postId := c.Param("postId")
+
+		if userId == "" || postId == "" {
+			return c.JSON(http.StatusBadRequest, map[string]string{
+				"message": "user id and post id required",
+			})
+		}
+
+		// if userId <= 0 {
+		// 	return c.String(http.StatusBadRequest, "user id must be postive number only")
+		// }
+		// transformation
+		idVal, err := strconv.Atoi(userId)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, map[string]string{
+				"message": "user id mustbe valid id",
+				"error":   err.Error(),
+			})
+		}
+
+		if idVal <= 0 {
+			return c.String(http.StatusBadRequest, "user id must be postive number only")
+		}
+
+		// Business logic
+		return c.JSON(200, map[string]interface{}{
+			"userId": idVal,
+			"postId": postId,
+		})
+
+	})
+	e.Logger.Fatal(e.Start("localhost:1323"))
 
 }
