@@ -128,22 +128,54 @@ func main() {
 	})
 
 	// Route Grouping & API Versioning
-	api := e.Group("/api")
-	v1 := api.Group("/v1")
-	v1.GET("profile", func(c echo.Context) error {})
-	v1.PUT("profile", func(c echo.Context) error {})
+	// api := e.Group("/api")
+	// v1 := api.Group("/v1")
+	// v1.GET("profile", func(c echo.Context) error {})
+	// v1.PUT("profile", func(c echo.Context) error {})
 
-	// USER
-	{
-		v1.GET("profile", func(c echo.Context) error {})
-		v1.PUT("profile", func(c echo.Context) error {})
-	}
-	//ORDER
-	{
-		v1.GET("order", func(c echo.Context) error {})
-		v1.PUT("order", func(c echo.Context) error {})
-	}
+	// // USER
+	// {
+	// 	v1.GET("profile", func(c echo.Context) error {})
+	// 	v1.PUT("profile", func(c echo.Context) error {})
+	// }
+	// //ORDER
+	// {
+	// 	v1.GET("order", func(c echo.Context) error {})
+	// 	v1.PUT("order", func(c echo.Context) error {})
+	// }
 	// Request Handling
+	// Reading JSON Body (Bind)
+
+	type RegisterRequest struct {
+		Name string `json:"name"`
+		Age  int    `json:"age"`
+	}
+
+	e.POST("/reguister", func(c echo.Context) error {
+		var body RegisterRequest
+
+		if err := c.Bind(&body); err != nil {
+			return c.JSON(http.StatusBadRequest, map[string]string{
+				"message": "please send valid data",
+				"err":     err.Error(),
+			})
+		}
+		return c.JSON(200, body)
+	})
+
+	type LoginRequest struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	e.POST("/login", func(c echo.Context) error {
+		var body LoginRequest
+
+		if err := c.Bind(&body); err != nil {
+			return c.String(http.StatusBadRequest, "Please send the valid data")
+		}
+		return c.JSON(200, body)
+	})
 
 	e.Logger.Fatal(e.Start("localhost:1323"))
 
